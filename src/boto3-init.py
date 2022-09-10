@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 import boto3
 import os
 
+load_dotenv()
+AWS_KEY_ID = os.environ.get('AWS_KEY_ID')
+AWS_SECRET = os.environ.get('AWS_SECRET')
 
 # Interaction with IAM
 # 1. At IAM screen click 'Users'
@@ -15,6 +18,9 @@ import os
 #       AmazonS3FullAccess
 
 s3 = boto3.client('s3',
-                  region_name= 'eu-west-2'
+                  region_name= 'eu-west-2',
                   aws_access_key_id=AWS_KEY_ID,
                   aws_secret_access_key=AWS_SECRET)
+
+response = s3.list_buckets()
+
